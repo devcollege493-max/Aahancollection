@@ -1,0 +1,166 @@
+
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initiaale=1.0">
+    <title>Modern Fashion Store</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #e67e22;
+            --light: #ecf0f1;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f9f9f9; scroll-behavior: smooth; }
+        
+        /* Header & Navigation */
+        header { 
+            background: var(--primary); color: white; padding: 15px 5%; 
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .cart-status { background: var(--accent); padding: 5px 15px; border-radius: 20px; font-weight: bold; }
+
+        .container { width: 90%; margin: 20px auto; }
+        
+        h2 { text-align: center; margin-top: 40px; color: var(--primary); text-transform: uppercase; }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px;
+        }
+
+        .product-card {
+            background: white; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center;
+            transition: 0.3s; padding-bottom: 15px;
+        }
+
+        .product-card:hover { transform: translateY(-10px); }
+
+        .product-card img { width: 100%; height: 250px; object-fit: cover; }
+
+        .price { color: #27ae60; font-size: 1.2rem; font-weight: bold; margin: 10px 0; }
+
+        .add-btn {
+            background: var(--accent); color: white; border: none;
+            padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: 0.3s;
+        }
+
+        .add-btn:hover { background: #d35400; }
+
+        /* Contact Form Section */
+        .form-section {
+            background: white; padding: 40px; border-radius: 15px;
+            max-width: 600px; margin: 50px auto; box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .form-section input, .form-section textarea {
+            width: 100%; padding: 12px; margin: 10px 0;
+            border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box;
+        }
+
+        .submit-btn {
+            width: 100%; background: var(--primary); color: white;
+            border: none; padding: 15px; border-radius: 5px; cursor: pointer; font-size: 1rem;
+        }
+
+        footer { text-align: center; padding: 20px; background: var(--primary); color: white; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>FashionHub</h1>
+        <div class="cart-status">🛒 Cart: <span id="cart-count">0</span> items</div>
+    </header>
+
+    <div class="container">
+        
+        <h2>T-Shirts</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400" alt="T-Shirt">
+                <h3>White Classic Tee</h3>
+                <p class="price">₹499</p>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400" alt="T-Shirt">
+                <h3>Black Urban Tee</h3>
+                <p class="price">₹599</p>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+
+        <h2>Jeans & Jackets</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=400" alt="Jeans">
+                <h3>Blue Slim Fit Jeans</h3>
+                <p class="price">₹1,499</p>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400" alt="Jacket">
+                <h3>Leather Biker Jacket</h3>
+                <p class="price">₹2,999</p>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+
+        <h2>Footwear</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" alt="Shoes">
+                <h3>Red Speed Runners</h3>
+                <p class="price">₹1,299</p>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400" alt="Shoes">
+                <h3>Casual Brown Sneaks</h3>
+                <p class="price">₹1,899</p>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Place Your Order</h2>
+            <form id="orderForm">
+                <input type="text" placeholder="Apka Naam (Full Name)" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="text" placeholder="Mobile Number" required>
+                <textarea rows="4" placeholder="Apna Pura Address aur Product Details likhein..."></textarea>
+                <button type="submit" class="submit-btn">Order Now</button>
+            </form>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 FashionHub. Sabhi rights reserved.</p>
+    </footer>
+
+    <script>
+        // Simple Cart Logic
+        let count = 0;
+        function addToCart() {
+            count++;
+            document.getElementById('cart-count').innerText = count;
+            alert("Product cart mein add ho gaya hai!");
+        }
+
+        // Form Submit Logic
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Dhanyawad! Apka order/message humein mil gaya hai. Hum jald hi sampark karenge.");
+            this.reset();
+        });
+    </script>
+
+</body>
+</html> ,<h1> add-btn
+
+</h1>
